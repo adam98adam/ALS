@@ -8,26 +8,24 @@
     ".NETCoreApp,Version=v3.0": []
   },
   "packageFolders": {
-    "C:\\Users\\Adam\\.nuget\\packages\\": {}
+    "C:\\Users\\Opty\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Adam\\Desktop\\ALS\\Project\\ALS\\ALS.csproj",
+      "projectUniqueName": "D:\\alsgit\\ALS\\Project\\ALS\\ALS.csproj",
       "projectName": "ALS",
-      "projectPath": "C:\\Users\\Adam\\Desktop\\ALS\\Project\\ALS\\ALS.csproj",
-      "packagesPath": "C:\\Users\\Adam\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Adam\\Desktop\\ALS\\Project\\ALS\\obj\\",
+      "projectPath": "D:\\alsgit\\ALS\\Project\\ALS\\ALS.csproj",
+      "packagesPath": "C:\\Users\\Opty\\.nuget\\packages\\",
+      "outputPath": "D:\\alsgit\\ALS\\Project\\ALS\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Adam\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\Opty\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -52,13 +50,7 @@
           "net48"
         ],
         "assetTargetFallback": true,
-        "warn": true,
-        "frameworkReferences": {
-          "Microsoft.NETCore.App": {
-            "privateAssets": "all"
-          }
-        },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
+        "warn": true
       }
     }
   }

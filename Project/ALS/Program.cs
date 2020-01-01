@@ -6,7 +6,9 @@ namespace ALS
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Parser p = new Parser();
+            p.parse();
+            p.printProductList(p.ProductList);
         }
     }
 }
