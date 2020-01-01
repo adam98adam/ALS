@@ -1,16 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace ALS {
     public class Parser {
         public List<Product> ProductList;
         private StreamReader sr;
-        
+        private List<Product> mostRatedProducts;
+
+        public List<Product> MostRatedProducts => mostRatedProducts;
+
         public Parser() {
             sr = new StreamReader("../../../files/amazon.txt");
             ProductList = new List<Product>();
+            parse();
         }
 
         public void parse() {
@@ -42,12 +47,23 @@ namespace ALS {
         }
 
         public void printProductList(List<Product> list) {
+            int productsWithNoReviews = 0;
             foreach (var product in list) {
                 Console.WriteLine(product.Id);
                 foreach (var v in product.Ratings) {
                     Console.WriteLine("Customer ASIN:\t" + v.Key + "\tRating:\t"+v.Value);
                 }
+
+                if (product.Ratings.Count == 0) {
+                    productsWithNoReviews++;
+                }
             }
+            Console.WriteLine("YO JEST " + productsWithNoReviews +" PRODUKTOW BEZ ZADNYCH OCEN");
+        }
+
+        public void takeMostRatedProducts(int amount) {
+            mostRatedProducts = ProductList.OrderByDescending(o=>o.Ratings.Count).ToList();
+            
         }
     }
 

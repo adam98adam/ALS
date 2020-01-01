@@ -7,8 +7,8 @@ namespace ALS
         static void Main(string[] args)
         {
             Parser p = new Parser();
-            p.parse();
-            p.printProductList(p.ProductList);
+            p.takeMostRatedProducts(6);
+            p.printProductList(p.MostRatedProducts);
         }
     }
 }
