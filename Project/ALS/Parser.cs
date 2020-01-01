@@ -60,10 +60,35 @@ namespace ALS {
             }
             Console.WriteLine("YO JEST " + productsWithNoReviews +" PRODUKTOW BEZ ZADNYCH OCEN");
         }
-
-        public void takeMostRatedProducts(int amount) {
+        
+        public void takeMostRatedProducts(int amount) { //Bierzemy produkty z najwieksza iloscia ocen
             mostRatedProducts = ProductList.OrderByDescending(o=>o.Ratings.Count).ToList();
             mostRatedProducts.RemoveRange(amount, mostRatedProducts.Count - amount);
+        }
+
+        public void takeMostActiveUsers(int amount) { //Bierzemy osoby które oceniły najwiecej produktów z listy powyżej (dictionary)
+            Dictionary<String, int> mostActiveUsers = new Dictionary<string, int>();
+            foreach (var product in mostRatedProducts) {
+                foreach (var rating in product.Ratings) {
+                    if (mostActiveUsers.ContainsKey(rating.Key)) mostActiveUsers[rating.Key]++;
+                    else mostActiveUsers.Add(rating.Key,1);
+                }
+            }
+
+            mostActiveUsers = mostActiveUsers.OrderByDescending(o => o.Value).ToDictionary(pair => pair.Key, pair => pair.Value); //Sortowanie
+            List<string> asinList = mostActiveUsers.Keys.ToList(); //Tworzenie listy ASIN
+            asinList.RemoveRange(amount, asinList.Count - amount); // USUWANIE LISTY
+            removeUnneededUsers(asinList);
+            Console.WriteLine(asinList.Count);
+        }
+
+        private void removeUnneededUsers(List<string> asinList) {
+            
+            foreach (var product in MostRatedProducts) {
+                var keysToRemove = product.Ratings.Keys.Except(asinList).ToList();
+                foreach (var key in keysToRemove) product.Ratings.Remove(key);
+            }
+            
         }
     }
 
