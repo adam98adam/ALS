@@ -63,7 +63,7 @@ namespace ALS {
 
         public void takeMostRatedProducts(int amount) {
             mostRatedProducts = ProductList.OrderByDescending(o=>o.Ratings.Count).ToList();
-            
+            mostRatedProducts.RemoveRange(amount, mostRatedProducts.Count - amount);
         }
     }
 
