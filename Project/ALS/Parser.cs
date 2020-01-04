@@ -80,6 +80,7 @@ namespace ALS {
             asinList.RemoveRange(amount, asinList.Count - amount); // USUWANIE LISTY
             removeUnneededUsers(asinList);
             Console.WriteLine(asinList.Count);
+            asignIDsToUsers();
         }
 
         private void removeUnneededUsers(List<string> asinList) {
@@ -90,8 +91,17 @@ namespace ALS {
             }
             
         }
+        private void asignIDsToUsers(List<string> asinList){
+            for(int i = 0; i < asinList.length; i++){
+                foreach (var product in MostRatedProducts){
+                    if (product.Ratings.ContainsKey(asinList[i])){
+                        product.Ratings.Add(i,product.Ratings[asinList[i]]);
+                        product.Ratings.Remove(asinList[i]);
+                    }
+                }
+            }
+        }
     }
-
     public class Product {
         private int id;
 
