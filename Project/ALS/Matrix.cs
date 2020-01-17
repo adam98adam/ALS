@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ALS
 {
-    class Matrix
+    public class Matrix
     {
         public double[,] Data { get; set; }
         public int RowCount { get; set; }
@@ -29,7 +29,11 @@ namespace ALS
                 }
             }
         }
-
+        public void FillWithZeros()
+        {
+            Array.Clear(Data,0,Data.Length);
+        }
+        
         public static Matrix operator *(Matrix leftFactor, Matrix rightFactor)
         {
             if (leftFactor.ColumnCount != rightFactor.RowCount)
@@ -89,6 +93,16 @@ namespace ALS
             {
                 Data[i, i] += lambda;
             }
+        }
+
+        public override string ToString() {
+            for (int i = 0; i < Data.GetLength(0); i++) {
+                for (int j = 0; j < Data.GetLength(1); j++) {
+                    Console.Write("\t" + Data[i,j]);
+                }
+                Console.WriteLine();
+            }
+            return "Done";
         }
     }
 }

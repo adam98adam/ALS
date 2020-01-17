@@ -9,7 +9,7 @@ namespace ALS {
         public List<Product> ProductList;
         private StreamReader sr;
         private List<Product> mostRatedProducts;
-
+        private List<string> asinList;
         public List<Product> MostRatedProducts => mostRatedProducts;
 
         public Parser() {
@@ -76,14 +76,14 @@ namespace ALS {
             }
 
             mostActiveUsers = mostActiveUsers.OrderByDescending(o => o.Value).ToDictionary(pair => pair.Key, pair => pair.Value); //Sortowanie
-            List<string> asinList = mostActiveUsers.Keys.ToList(); //Tworzenie listy ASIN
+            asinList = mostActiveUsers.Keys.ToList(); //Tworzenie listy ASIN
             asinList.RemoveRange(amount, asinList.Count - amount); // USUWANIE LISTY
-            removeUnneededUsers(asinList);
+            removeUnneededUsers();
             Console.WriteLine(asinList.Count);
             asignIDsToUsers();
         }
 
-        private void removeUnneededUsers(List<string> asinList) {
+        private void removeUnneededUsers() {
             
             foreach (var product in MostRatedProducts) {
                 var keysToRemove = product.Ratings.Keys.Except(asinList).ToList();
@@ -91,15 +91,30 @@ namespace ALS {
             }
             
         }
-        private void asignIDsToUsers(List<string> asinList){
-            for(int i = 0; i < asinList.length; i++){
+        private void asignIDsToUsers(){
+            for(int i = 0; i < asinList.Count; i++){
                 foreach (var product in MostRatedProducts){
                     if (product.Ratings.ContainsKey(asinList[i])){
-                        product.Ratings.Add(i,product.Ratings[asinList[i]]);
+                        product.Ratings.Add(i.ToString(),product.Ratings[asinList[i]]);
                         product.Ratings.Remove(asinList[i]);
                     }
                 }
             }
+        }
+
+        public Matrix returnMatrix() {
+            Matrix Rmatrix = new Matrix(asinList.Count,MostRatedProducts.Count);
+            Rmatrix.FillWithZeros();
+            int KnownReviews = 0;
+            for (int i = 0; i < mostRatedProducts.Count; i++) {
+                foreach (var rating in MostRatedProducts[i].Ratings) {
+                    Rmatrix.Data[Int32.Parse(rating.Key), i] = rating.Value;
+                    KnownReviews++;
+                }
+            }
+            
+            Console.WriteLine("Macierz jest zapełniona w " + KnownReviews * 100f/(asinList.Count * MostRatedProducts.Count) + "%");
+            return Rmatrix;
         }
     }
     public class Product {
