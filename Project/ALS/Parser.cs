@@ -17,7 +17,6 @@ namespace ALS {
             ProductList = new List<Product>();
             parse();
         }
-
         public void parse() {
             bool isDVD = false;
             int idCounter = 0;
@@ -65,7 +64,6 @@ namespace ALS {
             mostRatedProducts = ProductList.OrderByDescending(o=>o.Ratings.Count).ToList();
             mostRatedProducts.RemoveRange(amount, mostRatedProducts.Count - amount);
         }
-
         public void takeMostActiveUsers(int amount) { //Bierzemy osoby które oceniły najwiecej produktów z listy powyżej (dictionary)
             Dictionary<String, int> mostActiveUsers = new Dictionary<string, int>();
             foreach (var product in mostRatedProducts) {

@@ -13,15 +13,23 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/ALS/Matrix.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/ALS/Gauss.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/ALS/ObjectiveFunction.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ALS/Program.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ALS/Parser.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/ALS/ALS.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/ALS/Matrix.cs" />
+        <option value="$PROJECT_DIR$/ALS/files/ALS.cs" />
         <option value="$PROJECT_DIR$/ALS/Parser.cs" />
+        <option value="$PROJECT_DIR$/ALS/Gauss.cs" />
+        <option value="$PROJECT_DIR$/ALS/files/ObjectiveFunction.cs" />
+        <option value="$PROJECT_DIR$/ALS/ObjectiveFunction.cs" />
+        <option value="$PROJECT_DIR$/ALS/Matrix.cs" />
         <option value="$PROJECT_DIR$/ALS/Program.cs" />
+        <option value="$PROJECT_DIR$/ALS/ALS.cs" />
       </list>
     </option>
   </component>
@@ -76,7 +84,9 @@
       <updated>1577883921509</updated>
       <workItem from="1577883936633" duration="14076000" />
       <workItem from="1577965348810" duration="123000" />
-      <workItem from="1579270628613" duration="2141000" />
+      <workItem from="1579270628613" duration="2982000" />
+      <workItem from="1579288553812" duration="3207000" />
+      <workItem from="1579359492840" duration="7203000" />
     </task>
     <servers />
   </component>

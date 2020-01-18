@@ -71,7 +71,35 @@ namespace ALS
                 Data[row2, i] = tmp;
             }
         }
+        public List<int> FindAllProductsRatedByUser(int u)
+        {
+            List<int> list = new List<int>();
 
+            for (int i = 0; i < Data.GetLength(1); i++)
+            {
+                if (Data[u,i] != 0)
+                {
+                    list.Add(i);
+                }
+            }
+
+            return list;
+        }
+
+        public List<int> FindAllUsersWhoRatedProduct(int p)
+        {
+            List<int> list = new List<int>();
+
+            for (int i = 0; i < Data.GetLength(0); i++)
+            {
+                if (Data[i,p] != 0)
+                {
+                    list.Add(i);
+                }
+            }
+
+            return list;
+        }
         public Matrix GetTransposed()
         {
             var transposedMatrix = new Matrix(ColumnCount, RowCount);
