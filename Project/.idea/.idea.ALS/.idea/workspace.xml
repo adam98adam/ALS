@@ -12,7 +12,9 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$USER_HOME$/Downloads/AdamBorawskiGauss/Gauss/MyMatrix.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ALS/Matrix.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/Downloads/AdamBorawskiGauss/Gauss/Program.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ALS/Gauss.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ALS/ObjectiveFunction.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ALS/Program.cs" root0="FORCE_HIGHLIGHTING" />
@@ -23,13 +25,14 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/ALS/files/ALS.cs" />
-        <option value="$PROJECT_DIR$/ALS/Parser.cs" />
-        <option value="$PROJECT_DIR$/ALS/Gauss.cs" />
         <option value="$PROJECT_DIR$/ALS/files/ObjectiveFunction.cs" />
         <option value="$PROJECT_DIR$/ALS/ObjectiveFunction.cs" />
+        <option value="$USER_HOME$/Downloads/AdamBorawskiGauss/Gauss/MyMatrix.cs" />
+        <option value="$PROJECT_DIR$/ALS/Gauss.cs" />
         <option value="$PROJECT_DIR$/ALS/Matrix.cs" />
-        <option value="$PROJECT_DIR$/ALS/Program.cs" />
+        <option value="$PROJECT_DIR$/ALS/Parser.cs" />
         <option value="$PROJECT_DIR$/ALS/ALS.cs" />
+        <option value="$PROJECT_DIR$/ALS/Program.cs" />
       </list>
     </option>
   </component>
@@ -39,6 +42,7 @@
     <property name="Rider.DefaultBreakpoints.AreToggled" value="true" />
     <property name="Rider.ProjectViewActivator.IsNotFirstRun" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -86,7 +90,10 @@
       <workItem from="1577965348810" duration="123000" />
       <workItem from="1579270628613" duration="2982000" />
       <workItem from="1579288553812" duration="3207000" />
-      <workItem from="1579359492840" duration="7203000" />
+      <workItem from="1579359492840" duration="8185000" />
+      <workItem from="1579462540844" duration="8490000" />
+      <workItem from="1579471189654" duration="234000" />
+      <workItem from="1579550347834" duration="2275000" />
     </task>
     <servers />
   </component>

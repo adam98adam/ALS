@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace ALS
 {
@@ -6,7 +7,8 @@ namespace ALS
     {
         static void Main(string[] args)
         {
-            ALS t1 = new ALS(10,40,40,0.1,100);
+            ALS s1 = new ALS(20,1100,11000,0.1,20);
+            s1.startALS();
         }
     }
 }

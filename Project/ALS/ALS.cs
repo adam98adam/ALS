@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace ALS {
     public class ALS {
         public readonly Matrix R, U, P;
 
         private readonly int countOfFactors;
-        private Dictionary<Tuple<int, int>, double> ValuesSavedForHidingTest;
-
-        // Z pliku txt, jeśli istnieje
+        private Dictionary<Tuple<int, int>, double> TestSetValues;
+        private double lambda;
+        private int iterations;
         public ALS(int iloscFaktorow, int iloscProduktow, int iloscUserow, double lambda, int iterations)
         {
             Parser p = new Parser();
@@ -20,39 +21,19 @@ namespace ALS {
             P = new Matrix(iloscFaktorow, R.Data.GetLength(1));
             P.FillRandom();
             countOfFactors = iloscFaktorow;
-            HidingTest(lambda,iterations);
-        }
-        
-        
-        public Dictionary<Tuple<int, int>, double> PrepareToHidingTest()
-        {
-            var listOfHiddenRatings = new Dictionary<Tuple<int, int>, double>();
-            int third = 0;
-            for (int i = 0; i < R.Data.GetLength(0); i++) {
-                for (int j = 0; j < R.Data.GetLength(1); j++) {//i = users j = products
-                    if (R.Data[i, j] != 0) {
-                        third++;
-                        if (third == 3) {
-                            third = 0;
-                            listOfHiddenRatings.Add(Tuple.Create(i, j), R.Data[i, j]);
-                            R.Data[i, j] = 0;
-                        }
-                    }
-
-                }
-            }
-            return listOfHiddenRatings;
+            this.lambda = lambda;
+            this.iterations = iterations;
         }
 
-        public void HidingTest(double lambda, int iterations)
-        {
-            ValuesSavedForHidingTest = PrepareToHidingTest();
-            Execute(lambda, iterations);
+        public void startALS() {
+            Stopwatch s = new Stopwatch();
+            TestSetValues = CreateTestSet();
+            s.Start();
+            Execute();
 
             double sumOfErrors = 0;
-
-            //Console.WriteLine("\nWyniki testu zakrywania");
-            foreach (var item in ValuesSavedForHidingTest)
+            
+            foreach (var item in TestSetValues)
             {
                 var expected = item.Value;
 
@@ -66,15 +47,42 @@ namespace ALS {
                 }
 
                 double diff = Math.Abs(expected - real);
+                
                 Console.WriteLine("Oczekiwana: " + expected + ", Rzeczywista: " + real + ", różnica: " + diff);
                 sumOfErrors += diff;
             }
 
-            sumOfErrors = sumOfErrors / ValuesSavedForHidingTest.Count;
-            Console.WriteLine("\nŚredni błąd: " + sumOfErrors);
+            double averageDiff = sumOfErrors / TestSetValues.Count;
+            
+            Console.WriteLine("\nŚredni błąd: " + averageDiff);
+            Console.WriteLine("Czas wykonania: " + ((double)s.ElapsedMilliseconds) / 1000 + "s");
+            s.Stop();
         }
+        
+        public Dictionary<Tuple<int, int>, double> CreateTestSet()
+        {
+            var listOfTestRatings = new Dictionary<Tuple<int, int>, double>();
+            double total = 0;
+            double percent = 10;
+            for (int i = 0; i < R.Data.GetLength(0); i++) {
+                for (int j = 0; j < R.Data.GetLength(1); j++) {//i = users j = products
+                    if (R.Data[i, j] != 0) {
+                        if (total > 100)
+                        {
+                            listOfTestRatings.Add(Tuple.Create(i, j), R.Data[i, j]);
+                            R.Data[i, j] = 0;
+                            total -= 100;
+                        }
+                        total += percent;
+                    }
 
-        public void Execute(double lambda, int iterations)
+                }
+            }
+            return listOfTestRatings;
+        }
+        
+
+        public void Execute()
         {
             for (int k = 0; k < iterations; k++)
             {
@@ -91,8 +99,6 @@ namespace ALS {
                             Piu.Data[row, i] = P.Data[row, productsRatedByU[i]];
                         }
                     }
-                    // W tym miejscu Piu jest gotowe do użytku
-
                     Matrix Au = Piu * Piu.GetTransposed();
                     Au.AddLambdaMatrix(lambda);
 
@@ -107,7 +113,6 @@ namespace ALS {
                             Vu.Data[row, 0] += rating * Piu.Data[row, col];
                         }
                     }
-                    // W tym miejscu Vu jest gotowe do użytku
 
                     Matrix X = Gauss.Calculate(Au, Vu);
 
@@ -131,7 +136,6 @@ namespace ALS {
                             Uip.Data[row, i] = U.Data[row, usersWhoRatedP[i]];
                         }
                     }
-                    // W tym miejscu Uip jest gotowe do użytku
 
                     Matrix Bu = Uip * Uip.GetTransposed();
                     Bu.AddLambdaMatrix(lambda);
@@ -147,7 +151,6 @@ namespace ALS {
                             Wp.Data[row, 0] += rating * Uip.Data[row, col];
                         }
                     }
-                    // W tym miejscu Wp jest gotowe do użytku
 
                     Matrix X = Gauss.Calculate(Bu, Wp);
 
