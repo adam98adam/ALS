@@ -16,7 +16,7 @@ namespace ALS {
                             vectorSum += U.Data[row, i] * P.Data[row, j];
                         }
 
-                        sum1 += Math.Pow(R.Data[i, j] + vectorSum, 2);
+                        sum1 += Math.Pow(R.Data[i, j] - vectorSum, 2);
                     }
                 }
             }
